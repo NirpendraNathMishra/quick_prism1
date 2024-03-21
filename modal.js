@@ -1,23 +1,23 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
 // User Schema
-var userSchema = new Schema({
+let userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true, unique:false },
-  
+  createdAt: { type: Date, default: Date.now }
 });
 
 // Item Schema
-var itemSchema = new Schema({
+let itemSchema = new Schema({
   name: { type: String, required: true },
   quantity: { type: Number, required: true },
-  
+  price: { type: Number, required: true },
+  description: { type: String },
 });
 
 // Bill Schema
-var billSchema = new Schema({
+let billSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   items: [
     {
@@ -25,7 +25,9 @@ var billSchema = new Schema({
       quantity: { type: Number, required: true },
     }
   ],
-  
+  totalCost: { type: Number, required: true },
+  createdAt: { type: Date, default: Date.now },
+  paymentMethod: { type: String, required: true }
 });
 
 module.exports = {
