@@ -18,20 +18,27 @@ let itemSchema = new Schema({
 
 // Bill Schema
 let billSchema = new Schema({
-  user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  billedclient: { type: Schema.Types.ObjectId, ref: 'Client', required: true },
   items: [
     {
-      item: { type: Schema.Types.ObjectId, ref: 'Item', required: true },
+      itemName: { type: String, required: true },
+      //item: { type: Schema.Types.ObjectId, ref: 'Item', required: true },
       quantity: { type: Number, required: true },
     }
   ],
   totalCost: { type: Number, required: true },
   createdAt: { type: Date, default: Date.now },
-  paymentMethod: { type: String, required: true }
+  paymentMethod: { type: String, required: true },
+  paymentStatus: { type: String, required: true },
+});
+let clientSchema = new Schema({
+  name: { type: String, required: true, unique: true },
+  bills: [{ type: Schema.Types.ObjectId, ref: 'Bill' }]
 });
 
 module.exports = {
   User: mongoose.model('User', userSchema),
   Item: mongoose.model('Item', itemSchema),
-  Bill: mongoose.model('Bill', billSchema)
+  Bill: mongoose.model('Bill', billSchema),
+  Client: mongoose.model('Client', clientSchema)
 };
