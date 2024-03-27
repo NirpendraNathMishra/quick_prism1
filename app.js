@@ -11,7 +11,7 @@ var inventoryRouter = require('./routes/inventory');
 var billsRouter = require('./routes/bills');
 
 var app = express();
-mongoose.connect('mongodb+srv://ninja:ninja@cluster0.dippymp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+mongoose.connect('mongodb+srv://ninja:ninja@cluster0.m0kr1cn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
